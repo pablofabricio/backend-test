@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegisterTest extends TestCase
 {
+    //PM9
+    //Faltam testes para os casos de erro na validacao de externalId e no findAccountId, seria interessante
+    //também os testes de validação do request se tivesse sido utilizado um validador na função register.
     /**
      * Teste de registro de cartão
      *
@@ -24,6 +27,7 @@ class RegisterTest extends TestCase
                 'user_id' => $user->id,
             ]
         );
+        //PM6
         $token = $user->createToken(config('auth.token_name'))->plainTextToken;
 
         $headers = [
@@ -57,7 +61,7 @@ class RegisterTest extends TestCase
             'pin'     => $this->faker->regexify('\d{4}'),
             'card_id' => $this->faker->uuid,
         ];
-
+        //PM8
         $response = $this->postJson("/api/users/$user->id/card/register", $body, $headers);
 
         Http::assertSentInOrder(

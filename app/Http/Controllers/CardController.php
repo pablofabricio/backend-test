@@ -20,6 +20,8 @@ class CardController extends Controller
      */
     public function show(string $userId): JsonResponse
     {
+        //PA4
+        //A camada de integração deveria estar encapsulada na camada de use case
         $response = (new Find($userId))->handle();
 
         return $this->response(
@@ -34,6 +36,7 @@ class CardController extends Controller
      *
      * @return JsonResponse
      */
+    //PM- Poderia ter sido utilizado um Validador para validar o request
     public function register(string $userId, Request $request): JsonResponse
     {
         $response = (new Register($userId, $request->pin, $request->card_id))->handle();

@@ -90,6 +90,8 @@ class Update extends BaseDomain
         if (is_null($this->email)) {
             return;
         }
+        //PM1
+        //PM2
         if (!(new CanUseEmail($this->email))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o E-mail informado',

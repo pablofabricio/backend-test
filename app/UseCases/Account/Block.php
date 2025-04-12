@@ -54,6 +54,8 @@ class Block extends BaseUseCase
     public function handle(): void
     {
         try {
+            //PA3 Seria importante alterar a ordem de chamada das funções para garantir que a alteração
+            //local so seja realizada com o sucesso da chamada externa.
             $this->updateDatabase();
             $this->updateStatus();
         } catch (Throwable $th) {

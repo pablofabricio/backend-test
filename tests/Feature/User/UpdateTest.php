@@ -7,6 +7,9 @@ use App\Models\User;
 
 class UpdateTest extends TestCase
 {
+
+    //PM9
+    //Faltaram testes negativos dos casos de erro no create para validação de email,type e documentNumber
     /**
      * Teste de modificação de usuário quando não autorizado
      *

@@ -8,6 +8,9 @@ use Faker\Provider\pt_BR\Person;
 
 class CreateTest extends TestCase
 {
+
+    //PM9
+    //Faltaram testes negativos dos casos de erro no create para validação de email,type e documentNumber
     /**
      * Teste de criação de usuário quando não autorizado
      *
@@ -62,7 +65,10 @@ class CreateTest extends TestCase
      */
     public function testCreateWithSuccess()
     {
+
         $user  = User::factory()->manager()->create();
+        //PM6
+        //$this->actingAs($user);
         $token = $user->createToken(config('auth.token_name'))->plainTextToken;
 
         $headers = [
@@ -70,6 +76,9 @@ class CreateTest extends TestCase
             'Accept'        => 'application/json',
         ];
 
+
+        //PM7
+        //Poderia ser utilizada a factory de user com a função Make() para apenas gerar os dados.
         $body = [
             'document_number' => app(Person::class)->cpf(false),
             'name'            => $this->faker->name,
@@ -77,6 +86,27 @@ class CreateTest extends TestCase
             'password'        => $this->faker->word,
             'type'            => $this->faker->randomElement(['USER', 'VIRTUAL', 'MANAGER']),
         ];
+
+        //PM8
+        //Podemos utilizar algumas funções do próprio Laravel para simplificar e tornar mais clara
+        //a verificação do response.Exemplo:
+
+        // $expectedResponse = [
+        //     'success' => true,
+        //     'method'  => 'POST',
+        //     'code'    => 200,
+        //     'data'    => [
+        //         'name'  => $body['name'],
+        //         'email' => $body['email'],
+        //         'type'  => $body['type'],
+        //     ],
+        // ];
+
+        // $content = $this->postJson('/api/users', $body)
+        //     ->assertOk()
+        //     ->assertJson($expectedResponse, true)
+        //     ->decodeResponseJson();
+
 
         $response = $this->postJson('/api/users', $body, $headers);
 
@@ -96,6 +126,8 @@ class CreateTest extends TestCase
         );
 
         $content = json_decode($response->getContent(), true);
+
+
 
         $this->assertDatabaseHas(
             'users',

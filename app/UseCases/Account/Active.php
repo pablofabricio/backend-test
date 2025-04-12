@@ -23,6 +23,7 @@ class Active extends BaseUseCase
      */
     protected array $account;
 
+
     public function __construct(string $userId)
     {
         $this->userId = $userId;
@@ -53,6 +54,8 @@ class Active extends BaseUseCase
      */
     public function handle(): void
     {
+        //PA3 Seria importante alterar a ordem de chamada das funções para garantir que a alteração
+        //local so seja realizada com o sucesso da chamada externa.
         try {
             $this->updateDatabase();
             $this->updateStatus();

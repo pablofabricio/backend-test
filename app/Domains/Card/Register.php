@@ -68,6 +68,8 @@ class Register extends BaseDomain
      */
     protected function checkExternalId()
     {
+        //PM1
+        //PM2
         if (!(new CanUseExternalId($this->cardId))->handle()) {
             throw new InternalErrorException(
                 'Não é possível vincular esse cartão',

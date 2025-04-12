@@ -39,6 +39,21 @@ class CreateFirstUser extends BaseUseCase
      */
     protected array $user;
 
+    // public static function make(array $params): self
+    // {
+    //     return new self(
+    //         new CreateFirstUserParams(
+    //             $params['companyName'],
+    //             $params['companyDocumentNumber'],
+    //             $params['userName'],
+    //             $params['userDocumentNumber'],
+    //             $params['email'],
+    //             $params['password']
+    //         )
+    //     );
+    // }
+
+
     public function __construct(
         CreateFirstUserParams $params
     ) {
@@ -47,8 +62,6 @@ class CreateFirstUser extends BaseUseCase
 
     /**
      * Valida a empresa
-     *
-     * @return CreateCompanyDomain
      */
     protected function validateCompany(): CreateCompanyDomain
     {
@@ -58,6 +71,8 @@ class CreateFirstUser extends BaseUseCase
         ))->handle();
     }
 
+    //PA1
+    //Retorno desta função deveria ser um array e nao um void.
     /**
      * Cria a empresa
      *
@@ -112,8 +127,13 @@ class CreateFirstUser extends BaseUseCase
     /**
      * Cria um usuário MANAGER e a empresa
      */
+    //PM - Seria interessante adicionar um DTO como type ao retorno desta função, principalmente pelo nome sugerir
+    //que ele retorna um user quando na verdade retorna um usuário, empresa e token.
     public function handle()
     {
+        //PA3 - Da forma como esta sendo realizado o fluxo pode ocorrer de uma companhia ser criada mesmo
+        // no caso falho onde a verificação de usuário falha. Alterar as para que as verificações sejam
+        //feitas antes do create ou adicionar uma transaction.
         try {
             $companyDomain = $this->validateCompany();
             $this->createCompany($companyDomain);
