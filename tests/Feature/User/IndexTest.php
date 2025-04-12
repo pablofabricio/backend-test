@@ -16,6 +16,7 @@ class IndexTest extends TestCase
     public function testIndexWhenUnauthorized()
     {
         $user  = User::factory()->user()->create();
+        //PM6
         $token = $user->createToken(config('auth.token_name'))->plainTextToken;
 
         $headers = [
@@ -54,6 +55,9 @@ class IndexTest extends TestCase
      */
     public function testIndexWithNameFilter()
     {
+        //PM-Como o nome de usuário não é único seria interessante criar o user de outra empresa com o
+        //mesmo nome que o user da empresa desejada para garantir que o filtro é aplicado apenas a usuários
+        //da empresa vinculada ao usuário logado
         User::factory()->create();
         $user  = User::factory()->manager()->create();
         User::factory()->create(
@@ -61,6 +65,7 @@ class IndexTest extends TestCase
                 'company_id' => $user->company_id,
             ]
         );
+
         $token = $user->createToken(config('auth.token_name'))->plainTextToken;
 
         $headers = [

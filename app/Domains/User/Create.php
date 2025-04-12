@@ -69,6 +69,7 @@ class Create extends BaseDomain
         $this->cryptPassword($password);
     }
 
+    //PA1
     /**
      * Encripta a senha
      *
@@ -88,6 +89,8 @@ class Create extends BaseDomain
      */
     protected function checkEmail(): void
     {
+        //PM1
+        //PM2
         if (!(new CanUseEmail($this->email))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o E-mail informado',
@@ -103,6 +106,8 @@ class Create extends BaseDomain
      */
     protected function checkDocumentNumber(): void
     {
+        //PM1
+        //PM2
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o CPF informado',
@@ -118,6 +123,7 @@ class Create extends BaseDomain
      */
     protected function checkType(): void
     {
+        //PM3
         if (!in_array($this->type, ['USER', 'VIRTUAL', 'MANAGER'])) {
             throw new InternalErrorException(
                 'Não é possível adicionar o tipo informado',

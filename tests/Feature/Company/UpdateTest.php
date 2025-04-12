@@ -55,6 +55,8 @@ class UpdateTest extends TestCase
      */
     public function testUpdateName()
     {
+        //PA1
+        //Teste resulta em falha por erro na função update de company
         $user  = User::factory()->manager()->create();
         $token = $user->createToken(config('auth.token_name'))->plainTextToken;
 

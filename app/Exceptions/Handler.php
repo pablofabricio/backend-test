@@ -133,7 +133,7 @@ class Handler extends ExceptionHandler
             );
         }
 
-        dump($exception);
+        // dump($exception);
 
         $response = new DefaultResponse(
             null,

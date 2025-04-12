@@ -39,6 +39,16 @@ class UserController extends Controller
      */
     public function register(RegisterRequest $request): JsonResponse
     {
+        //PM
+        //Eu alteraria criação da classe CreateFirstUser utilizando de forma estática com a criação de
+        //uma função make que encapsularia a o createFirstUserParams e receberia o $request->validated()
+        //A função make foi adicionado em forma de comentário dentro do arquivo CreateFirstUser
+        //Exemplo:
+        //$response = CreateFirstUser::make($request->validated())->handle();
+        //return $this->response(
+        //     RegisterResource::default($response)
+        // );
+
         $params = new CreateFirstUserParams(
             $request->company_name,
             $request->company_document_number,
@@ -50,6 +60,7 @@ class UserController extends Controller
 
         $useCase  = new CreateFirstUser($params);
         $response = $useCase->handle();
+
 
         return $this->response(
             new DefaultResponse(

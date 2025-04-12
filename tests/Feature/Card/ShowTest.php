@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ShowTest extends TestCase
 {
+    //PM9
+    //Verificação do caso negativo quando o usuário não possui um cartão registrado.
     /**
      * Teste de busca de cartão
      *

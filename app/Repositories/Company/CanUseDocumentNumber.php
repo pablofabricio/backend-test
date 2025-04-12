@@ -37,7 +37,8 @@ class CanUseDocumentNumber extends BaseRepository
      * @return bool
      */
     public function handle(): bool
-    {
+    {   //PA2
+        //O retorno dessa query é uma instância do model da empresa e não do usuário como o nome sugere
         $user = $this->builder
             ->where('document_number', $this->documentNumber)
             ->first();

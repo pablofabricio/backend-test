@@ -43,10 +43,20 @@ class CompanyController extends Controller
      */
     public function update(UpdateRequest $request): JsonResponse
     {
+        //PA4
+        //Essa função do controller deveria chamar o useCase de update de company que chamaria o find do
+        //repository de company
+        //PA3
+        //O updateDomain não será necessário uma vez que não existem validações.
+        //PA2
+        //A nomeação das variáveis $dominio e resposta em português fogem ao padrão utilizado no projeto.
+        //PA1
+        //Após o find na empresa o name recebido no request não é realmente atualizado
         $dominio = (new UpdateDomain(
             Auth::user()->company_id,
             $request->name,
         ))->handle();
+
         (new CompanyUpdate($dominio))->handle();
 
         $resposta = Company::find(Auth::user()->company_id)->first()->toArray();

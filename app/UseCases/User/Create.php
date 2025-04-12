@@ -52,6 +52,7 @@ class Create extends BaseUseCase
      *
      * @return void
      */
+    //PA1
     protected function createUser(CreateDomain $domain): void
     {
         $this->user = (new CreateRepository($domain))->handle();

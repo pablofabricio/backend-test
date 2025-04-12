@@ -39,6 +39,7 @@ class Create extends BaseRepository
      */
     public function handle(): array
     {
+
         return $this->create(
             [
                 'name'            => $this->domain->name,

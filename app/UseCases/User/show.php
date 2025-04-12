@@ -8,6 +8,9 @@ use App\Repositories\User\Find;
 
 class show extends BaseUseCase
 {
+    //PA2
+    //Renomeação das propriedades de forma clara e objetiva.
+    // $a= UserId, $b= CompanyId, $c= User
     /**
      * Id do usuário
      *

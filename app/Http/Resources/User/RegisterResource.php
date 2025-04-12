@@ -2,16 +2,22 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Responses\DefaultResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+
+
 
 class RegisterResource extends JsonResource
 {
+    //PM4
+    // use HasDefaultResponse;
+
     /**
-    * Transform the resource into an array.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return array
-    */
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
     public function toArray($request)
     {
         return [

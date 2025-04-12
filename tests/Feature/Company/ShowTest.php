@@ -7,6 +7,7 @@ use App\Models\User;
 
 class ShowTest extends TestCase
 {
+    //PM Faltam teste de falha para companhia não encontrada
     /**
      * Teste de busca de dados de empresa
      *
@@ -14,6 +15,8 @@ class ShowTest extends TestCase
      */
     public function testShow()
     {
+
+        //PM6
         $user    = User::factory()->user()->create();
         $company = $user->company;
         $token   = $user->createToken(config('auth.token_name'))->plainTextToken;

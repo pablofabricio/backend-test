@@ -33,6 +33,8 @@ class Create extends BaseDomain
      */
     protected function checkDocumentNumber()
     {
+        //PM1
+        //PM2
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o CNPJ informado',
@@ -48,6 +50,7 @@ class Create extends BaseDomain
      */
     public function handle(): self
     {
+        //Renomear para CheckUniqueDocumentNumber para facilitar o entendimento do que é um document number válido.
         $this->checkDocumentNumber();
 
         return $this;

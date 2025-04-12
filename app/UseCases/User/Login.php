@@ -32,9 +32,11 @@ class Login extends BaseUseCase
      */
     protected function createToken(): void
     {
+        //PM- Renomear o repository create de token para CreateToken utilizando o padrão camelCase.
         $this->token = (new create_token($this->id))->handle();
     }
 
+    //PA- Descrição incorreta
     /**
      * Cria um usuário MANAGER e a empresa
      */
