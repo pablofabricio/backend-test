@@ -1,66 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📋 Revisão Técnica do Projeto
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este documento tem como objetivo apresentar uma análise crítica do código fornecido no desafio técnico.  
+Não foi necessário implementar alterações diretas nem desenvolver novas funcionalidades — o foco está **na revisão e identificação de pontos de atenção (PA)** e **sugestões de melhoria (PM)**.
 
-## About Laravel
+Durante a revisão, foram adicionados **comentários diretamente no código** com as seguintes marcações:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🔴 `PA` (**Ponto de Atenção**): representa **erros ou más práticas** encontradas no código.  
+- 🟡 `PM` (**Ponto de Melhoria**): representa **oportunidades de refatoração**, **simplificação** ou **clareza**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Cada marcação é seguida por um número (`PA1`, `PM1`, etc.) que ajuda a identificar e agrupar ocorrências semelhantes.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🔴 Pontos de Atenção (PA)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Tag   | Descrição |
+|-------|-----------|
+| **PA1** | Tipagem incorreta. Exemplo: declaração inconsistente ou imprecisa de tipos em propriedades ou parâmetros. |
+| **PA2** | Nomeação de variáveis incorreta, confusa ou que não representa claramente seu propósito. |
+| **PA3** | Erros de lógica ou código que podem comprometer a execução correta da aplicação. |
+| **PA4** | Violações ao padrão arquitetural adotado no projeto (ex: regras de negócio misturadas com controladores ou recursos). |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🟡 Pontos de Melhoria (PM)
 
-## Laravel Sponsors
+- **PM1**: Alteração dos repositórios que usam `canUse` para `exists` ou algo semelhante.  
+  Exemplo: `CanUseDocumentNumber` — este repositório poderia se chamar `ExistsDocumentNumber` para facilitar o entendimento de que ele é uma **consulta** e não uma **regra de negócio**, além de refletir melhor sua função.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **PM2**: Seria interessante atribuir o resultado a uma variável para facilitar o entendimento.  
+  Por exemplo:
+  ```php
+  $canUseDocumentNumber = (new CanUseDocumentNumber($this->documentNumber))->handle();
+  ```
+  E então utilizar:
+  ```php
+  if (!$canUseDocumentNumber) ...
+  ```
 
-### Premium Partners
+- **PM3**: Criação de uma constante contendo o array de tipos de usuário (`['USER', 'VIRTUAL', 'MANAGER']`), facilitando a reutilização e concentrando possíveis alterações em um único local.  
+  A constante pode ser armazenada em uma classe `UserType` e acessada com `UserType::TYPES`, por exemplo.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **PM4**: Para facilitar a escrita e legibilidade dos trechos de código de retorno.  
+  Exemplo atual:
+  ```php
+  return $this->response(
+      new DefaultResponse(new RegisterResource($response))
+  );
+  ```
+  Seria possível criar uma trait `HasDefaultResponse`:
+  ```php
+  trait HasDefaultResponse
+  {
+      public static function default(array $response): DefaultResponse
+      {
+          return new DefaultResponse(new static($response));
+      }
+  }
+  ```
+  E alterar a criação do resource de resposta de forma estática, utilizando a função `default`:
+  ```php
+  return $this->response(RegisterResource::default($response));
+  ```
 
-## Contributing
+- **PM5**: Simplificação do construtor.  
+  De:
+  ```php
+  /**
+   * @var CreateFirstUserParams
+   */
+  protected CreateFirstUserParams $params;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+  public function __construct(CreateFirstUserParams $params)
+  {
+      $this->params = $params;
+  }
+  ```
+  Para:
+  ```php
+  public function __construct(protected CreateFirstUserParams $params) {}
+  ```
 
-## Code of Conduct
+- **PM6**: A criação do token de autenticação no teste pode ser alterada pela função `actingAs($user)`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **PM7**: Alterar utilização do `Faker` diretamente no arquivo de testes pela utilização do `factory()` com a função `make()`.
 
-## Security Vulnerabilities
+- **PM8**: Podemos utilizar algumas funções do próprio Laravel para simplificar e tornar mais clara a verificação do response.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **PM9**: Faltaram testes negativos, ou testes que resultam em falha na criação e update devido a validações.
