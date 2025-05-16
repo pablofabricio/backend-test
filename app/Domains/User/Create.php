@@ -1,5 +1,7 @@
 <?php
 
+// sugestão: utilização do 'declare(strict_types=1);'
+
 namespace App\Domains\User;
 
 use App\Domains\BaseDomain;
@@ -60,6 +62,7 @@ class Create extends BaseDomain
         string $password,
         string $type
     ) {
+        // sugestão: seguir com a identação simples (PSR-12)
         $this->companyId      = $companyId;
         $this->name           = $name;
         $this->documentNumber = $documentNumber;
@@ -88,6 +91,7 @@ class Create extends BaseDomain
      */
     protected function checkEmail(): void
     {
+        // sugestão: incluir um layer service para remover o acesso do domain ao repository
         if (!(new CanUseEmail($this->email))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o E-mail informado',
@@ -103,6 +107,7 @@ class Create extends BaseDomain
      */
     protected function checkDocumentNumber(): void
     {
+        // sugestão: mover a chamada da validação para uma variável
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o CPF informado',
@@ -118,6 +123,8 @@ class Create extends BaseDomain
      */
     protected function checkType(): void
     {
+        // sugestão: incluir o array de tipos em um enum ou constante onde poderá conter um método que
+        // retorna todos os tipos registrados
         if (!in_array($this->type, ['USER', 'VIRTUAL', 'MANAGER'])) {
             throw new InternalErrorException(
                 'Não é possível adicionar o tipo informado',

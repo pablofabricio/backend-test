@@ -31,6 +31,7 @@ class Gateway
      *
      * @return Response
      */
+    // sugestão: abstrair e deduzir nível de identação
     public function sendRequest(
         string $method,
         string $url,

@@ -1,5 +1,7 @@
 <?php
 
+// sugestão: utilização do 'declare(strict_types=1);',
+
 namespace App\Domains\Company;
 
 use App\Domains\BaseDomain;
@@ -24,6 +26,7 @@ class Create extends BaseDomain
 
     public function __construct(string $name, string $documentNumber)
     {
+        // sugestão: seguir com a identação simples (PSR-12)
         $this->name           = $name;
         $this->documentNumber = $documentNumber;
     }
@@ -31,8 +34,9 @@ class Create extends BaseDomain
     /**
      * Documento de empresa deve ser único no sistema
      */
-    protected function checkDocumentNumber()
+    protected function checkDocumentNumber() // sugestão: retorno do método
     {
+        // sugestão: incluir um layer service para remover o acesso do domain ao repository
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o CNPJ informado',

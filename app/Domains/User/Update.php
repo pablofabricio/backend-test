@@ -77,6 +77,7 @@ class Update extends BaseDomain
      */
     protected function cryptPassword(?string $password): void
     {
+        // sugestão: abastrair a criação do hash removendo o acoplamento da façade, para facilitar a testabilidade
         $this->password = !is_null($password) ? Hash::make($password) : null;
     }
 
@@ -89,7 +90,7 @@ class Update extends BaseDomain
     {
         if (is_null($this->email)) {
             return;
-        }
+        } // sugestão: remover validação duplicada seguindo a sugestão do layer service
         if (!(new CanUseEmail($this->email))->handle()) {
             throw new InternalErrorException(
                 'Não é possível adicionar o E-mail informado',
@@ -107,7 +108,7 @@ class Update extends BaseDomain
     {
         if (is_null($this->type)) {
             return;
-        }
+        } // sugestão: remover duplicação de código
         if (!in_array($this->type, ['USER', 'VIRTUAL', 'MANAGER'])) {
             throw new InternalErrorException(
                 'Não é possível adicionar o tipo informado',

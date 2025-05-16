@@ -43,12 +43,17 @@ class CompanyController extends Controller
      */
     public function update(UpdateRequest $request): JsonResponse
     {
+        // sugestão: validação do company_id antes da passagem para criação da classe, pois ele poderá ser null
+        // para uma cobertura maior destes cenários, poderia estar incluindo no projeto o PHPStan
         $dominio = (new UpdateDomain(
             Auth::user()->company_id,
             $request->name,
         ))->handle();
+
+        // sugestão: service layer para a company
         (new CompanyUpdate($dominio))->handle();
 
+        // sugestão: remover a utilização da model no controller, mover para a repository
         $resposta = Company::find(Auth::user()->company_id)->first()->toArray();
 
         return $this->response(

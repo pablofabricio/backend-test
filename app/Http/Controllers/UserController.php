@@ -39,6 +39,7 @@ class UserController extends Controller
      */
     public function register(RegisterRequest $request): JsonResponse
     {
+        // sugestão: poderia alterar o pasta e nome para ObjectValues
         $params = new CreateFirstUserParams(
             $request->company_name,
             $request->company_document_number,

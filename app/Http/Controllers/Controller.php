@@ -24,6 +24,7 @@ class Controller extends BaseController
      */
     public function response(DefaultResponse $response): JsonResponse
     {
+        // sugestão: seria utilizar no options utilizar o perador | bit para combinação deixando mais claro
         $jsonOptions = JSON_UNESCAPED_UNICODE + JSON_PRESERVE_ZERO_FRACTION;
         return response()->json($response->toArray(), $response->code, [], $jsonOptions);
     }
