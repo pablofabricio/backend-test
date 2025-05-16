@@ -1,5 +1,7 @@
 <?php
 
+// sugestão: utilização do 'declare(strict_types=1);'
+
 namespace App\Domains\Company;
 
 use App\Domains\BaseDomain;
@@ -33,6 +35,7 @@ class Update extends BaseDomain
      */
     public function handle(): self
     {
+        // sugestão: remover comentário autoexplicativo
         // Nenhuma validação necessária
 
         return $this;

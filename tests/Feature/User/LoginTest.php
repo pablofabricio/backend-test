@@ -2,11 +2,15 @@
 
 namespace Tests\Feature\User;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use App\Models\User;
 
 class LoginTest extends TestCase
 {
+    // sugestão: utilizar DatabaseMigrations para utilizar as migrações na execução
+    // e implementar a ferramente coverage para cobrir toda a aplicação
+
     /**
      * Teste de login de usuário quando não autorizados
      *
@@ -70,5 +74,6 @@ class LoginTest extends TestCase
                 ]
             ]
         );
+
     }
 }

@@ -17,6 +17,9 @@ abstract class BaseDomain
      */
     public function __get(string $prop): mixed
     {
+        // sugestão: validar se a propriedade existe na classe caso não retornar null evitando erro
+        // outra sugestão é criar um accessors recuperando os dados como função get{$propName}()
         return $this->{$prop};
     }
+
 }

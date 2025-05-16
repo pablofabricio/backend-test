@@ -1,5 +1,8 @@
 <?php
 
+// sugestão: utilização do 'declare(strict_types=1);',
+// é uma boa prática, assim evitando conversões automáticas de tipo para uma maior segurança e evitar bugs
+
 namespace App\Domains\Card;
 
 use App\Domains\BaseDomain;
@@ -9,6 +12,7 @@ use App\Repositories\Card\CanUseExternalId;
 
 class Register extends BaseDomain
 {
+    // sugestão: remover os comentários autoexplicativos.
     /**
      * Id da conta
      *
@@ -39,6 +43,7 @@ class Register extends BaseDomain
 
     public function __construct(string $userId, string $pin, string $cardId)
     {
+        // sugestão: seguir com a identação simples (PSR-12)
         $this->userId = $userId;
         $this->pin    = $pin;
         $this->cardId = $cardId;
@@ -51,21 +56,25 @@ class Register extends BaseDomain
      */
     protected function findAccountId(): void
     {
+        // sugestão: incluir um layer service para remover o acesso do domain ao repository
         $account = (new FindByUser($this->userId))->handle();
 
         if (is_null($account)) {
             throw new InternalErrorException(
-                'ACCOUNT_NOT_FOUND',
-                161001001
+                'ACCOUNT_NOT_FOUND', // sugestão: incluir uma mensagem amigável
+                161001001 // sugestão: mover esse código para um enum correspondente
             );
         }
 
+        // sugestão: validar se a chave existe
         $this->accountId = $account['id'];
     }
 
     /**
      * Cartão não pode já estar vinculado
      */
+    // sugestão: incluir o retorno do método,
+    // outro ponto seria evitar retorno void para melhorar a cobertura de assertividade nos testes
     protected function checkExternalId()
     {
         if (!(new CanUseExternalId($this->cardId))->handle()) {

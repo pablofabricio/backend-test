@@ -20,6 +20,7 @@ class BaseException extends \Exception
      *
      * @var int|null
      */
+    // sugestão: poderia usar o operador ?int $responseCode = null
     private int|null $responseCode = null;
 
     /**

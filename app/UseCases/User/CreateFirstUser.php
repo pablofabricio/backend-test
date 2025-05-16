@@ -116,6 +116,7 @@ class CreateFirstUser extends BaseUseCase
     {
         try {
             $companyDomain = $this->validateCompany();
+            // sugestão: classe possui mais de uma responsabilidade.
             $this->createCompany($companyDomain);
             $userDomain = $this->validateUser();
             $this->createUser($userDomain);
