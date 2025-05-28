@@ -6,8 +6,15 @@ use Throwable;
 use App\UseCases\BaseUseCase;
 use App\Repositories\User\Find;
 
+/**
+ * Nomenclatura da classe foge da PSR (PascalCase), o correto seria: Show
+ */
 class show extends BaseUseCase
 {
+    /**
+     * Nome das propriedades $a, $b e $c ferem as boas práticas do Clean Code, não sendo possível identificar a finalidade das mesmas.
+     */
+
     /**
      * Id do usuário
      *
