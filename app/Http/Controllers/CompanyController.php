@@ -43,12 +43,21 @@ class CompanyController extends Controller
      */
     public function update(UpdateRequest $request): JsonResponse
     {
+        /**
+         * Variável $dominio foge do padrão em inglês utilizado no projeto.
+         */
         $dominio = (new UpdateDomain(
             Auth::user()->company_id,
             $request->name,
         ))->handle();
         (new CompanyUpdate($dominio))->handle();
 
+        /**
+         * Variável $resposta foge do padrão em inglês utilizado no projeto.
+         * Essa resposta poderia ser atribuída na chamada do repository acima, além de:
+         * - criar uma dependência entre o controller e o eloquent.
+         * - realizar a mesma operação 2x desnecessáriamente afetando a performance.
+         */
         $resposta = Company::find(Auth::user()->company_id)->first()->toArray();
 
         return $this->response(

@@ -46,6 +46,10 @@ class Find extends BaseRepository
      */
     public function handle(): ?array
     {
+        /**
+         * Essa busca provavelmente deve quebrar pois o eloquent não suporta o método where() e posteriormente um find().
+         * O ideal seria trocar por $this->builder->where('id', $this->id)->where('company_id', $this->companyId)->first()?->toArray()
+         */
         $this->builder->where('company_id', $this->companyId);
 
         return $this->find($this->id);

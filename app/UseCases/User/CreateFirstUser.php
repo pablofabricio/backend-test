@@ -67,6 +67,18 @@ class CreateFirstUser extends BaseUseCase
      */
     protected function createCompany(CreateCompanyDomain $domain): void
     {
+        /**
+         * Vou comentar sobre isso apenas aqui para não ficar redundante, mas isso é valido para todos os lugares que utilizam os repositories para interação com banco de dados.
+         * 
+         * Complementando as sugestões que eu já coloquei no arquivo app\Repositories\BaseRepository.php
+         * Na aplicação como um todo claramente ao usar os repositories existentes, se cria uma dependência entre os casos de uso e infraestrutura,
+         * pois os repositories dependem diretamente do Eloquent ORM, ferindo assim os conceitos de arquiteturas como Clean Arch e DDD 
+         * que enfatizam a independência da camada de lógica de negócio da aplicação e infraestrutura.
+         * Portanto o recomendado é que esses repositories cheguem até aqui através de injeção de dependência, 
+         * porém nessa injeção de dependência colocar a tipagem de uma interface genérica dessa iteração, então o código ficaria algo parecido com:
+         * $this->company = $this->createCompanyRepository->handle();
+         * sendo que $this->createCompanyRepository receberia em seu construtor uma tipagem da interface CreateCompanyRepositoryInterface
+         */
         $this->company = (new CreateCompanyRepository($domain))->handle();
     }
 
@@ -115,6 +127,9 @@ class CreateFirstUser extends BaseUseCase
     public function handle()
     {
         try {
+            /**
+             * Como envolve persistência de dados de mais de uma tabela, usar controle de transação ->beginTransaction e usar ->commit em caso de sucesso e ->rollback em caso de exceção.
+             */
             $companyDomain = $this->validateCompany();
             $this->createCompany($companyDomain);
             $userDomain = $this->validateUser();

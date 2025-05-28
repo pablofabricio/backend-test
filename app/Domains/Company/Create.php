@@ -34,6 +34,14 @@ class Create extends BaseDomain
     protected function checkDocumentNumber()
     {
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
+            /**
+             * Usar uma exceção mais recomendada para essa validação como \InvalidArgumentException
+             */
+
+            /**
+             * Estudar a possibilidade de colocar uma mensagem mais clara do erro como (CNPJ já existente),
+             * porém dependendo da estratégia pode não ser uma boa idéia expor que já existe essa informação na base.
+             */
             throw new InternalErrorException(
                 'Não é possível adicionar o CNPJ informado',
                 0

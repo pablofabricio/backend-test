@@ -4,6 +4,10 @@ namespace App\UseCases\User;
 
 use Throwable;
 use App\UseCases\BaseUseCase;
+/**
+ * Além de não ter motivos para criar esse alias pois não existe outra classe com esse nome, 
+ * esse alias foge do padrão de nomenclaturas PascalCase que as PSR's enfatizam, o correto seria "as CreateToken"
+ */
 use App\Repositories\Token\Create as create_token;
 
 class Login extends BaseUseCase

@@ -20,6 +20,9 @@ class CardController extends Controller
      */
     public function show(string $userId): JsonResponse
     {
+        /**
+         * Cria uma dependência direta entre o controller e a integração, fugindo também do padrão arquitetural do projeto que utiliza os usecases.
+         */
         $response = (new Find($userId))->handle();
 
         return $this->response(
