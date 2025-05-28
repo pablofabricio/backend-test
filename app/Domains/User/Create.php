@@ -89,6 +89,14 @@ class Create extends BaseDomain
     protected function checkEmail(): void
     {
         if (!(new CanUseEmail($this->email))->handle()) {
+            /**
+             * Usar uma exceção mais recomendada para essa validação como \InvalidArgumentException
+             */
+
+            /**
+             * Estudar a possibilidade de colocar uma mensagem mais clara do erro como (Email já existente),
+             * porém dependendo da estratégia pode não ser uma boa idéia expor que já existe essa informação na base.
+             */
             throw new InternalErrorException(
                 'Não é possível adicionar o E-mail informado',
                 0
@@ -104,6 +112,14 @@ class Create extends BaseDomain
     protected function checkDocumentNumber(): void
     {
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {
+            /**
+             * Usar uma exceção mais recomendada para essa validação como \InvalidArgumentException
+             */
+
+            /**
+             * Estudar a possibilidade de colocar uma mensagem mais clara do erro como (CPF já existente),
+             * porém dependendo da estratégia pode não ser uma boa idéia expor que já existe essa informação na base.
+             */
             throw new InternalErrorException(
                 'Não é possível adicionar o CPF informado',
                 0
@@ -119,6 +135,13 @@ class Create extends BaseDomain
     protected function checkType(): void
     {
         if (!in_array($this->type, ['USER', 'VIRTUAL', 'MANAGER'])) {
+            /**
+             * Usar uma exceção mais recomendada para essa validação como \InvalidArgumentException
+             */
+
+             /**
+              * Colocar mensagem mais clara do erro, por exemplo: Tipo informado inválido. Tipos aceitos: ['USER', 'VIRTUAL', 'MANAGER']
+              */
             throw new InternalErrorException(
                 'Não é possível adicionar o tipo informado',
                 0

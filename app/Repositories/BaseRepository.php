@@ -10,6 +10,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 
+/**
+ * Sobre a implementação dos Repositories como um todo:
+ * Da forma que foi estruturado, pode-se interpretar que são genéricos quando na verdade não são, pois dependem do Eloquent ORM para iteração com banco de dados.
+ * Considerando o conceito de Interface Adapters do Clean Arch, eu recomendo migrar toda essa estrutura de Repositories em um novo diretório que pode ser em app/Repositories/Eloquent.
+ * Assim fica claro que é uma implementação utilizando o Eloquent ORM.
+ * Além disso poderia implementar uma nova interface mais genérica ou modificar a que já existe BaseRepositoryInterface 
+ * (embora nela tenha métodos que claramente foram criados visando implementação do Eloquent em específico). 
+ * Assim, futuramente facilitando a implementação de novo Adapters com o PDO por exemplo, que ficaria dentro da estrutura app/Repositories/Pdo.
+ */
 abstract class BaseRepository implements BaseRepositoryInterface
 {
     /**
