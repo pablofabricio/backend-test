@@ -28,6 +28,12 @@ class Find extends Gateway
     }
 
     /**
+     * Apesar do nome do método dar a entender que busca os dados de uma conta, tudo que ele faz é setar o external_id da conta.
+     * A nomenclatura ideal seria setExternalId().
+     * Além disso o ideal é que essa função esteja na camada de UseCases e passe o externalId via injeção de dependência por exemplo, 
+     * já que é um parâmetro imprescindível para o funcionamento dessa integração.
+     */
+    /**
      * Busca os dados de conta
      *
      * @return void
@@ -36,6 +42,10 @@ class Find extends Gateway
     {
         $account = (new FindByUser($this->userId))->handle();
 
+        /**
+         * Definir o código de exceção 161001001 em uma constante para ajudar a entender do que o mesmo se trata.
+         * A exception mais adequada 
+         */
         if (is_null($account)) {
             throw new InternalErrorException(
                 'ACCOUNT_NOT_FOUND',
@@ -57,6 +67,9 @@ class Find extends Gateway
     }
 
     /**
+     * Descrição do método não reflete o que o mesmo faz.
+     */
+    /**
      * Modifica o status de uma conta
      *
      * @return array
@@ -66,6 +79,9 @@ class Find extends Gateway
         $this->findAccountData();
         $url = $this->requestUrl();
 
+        /**
+         * O nome mais adequado para a variável $request seria $response, pois se trata de uma resposta da API.
+         */
         $request = $this->sendRequest(
             method: 'get',
             url:    $url,

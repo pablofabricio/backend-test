@@ -54,6 +54,9 @@ class Block extends BaseUseCase
     public function handle(): void
     {
         try {
+            /**
+             * Inverter a ordem desses métodos, pois se houver falha na requisição para a API, a base vai ficar inconsistente.
+             */
             $this->updateDatabase();
             $this->updateStatus();
         } catch (Throwable $th) {
