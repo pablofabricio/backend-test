@@ -103,6 +103,9 @@ trait Logger
                 ],
             ];
 
+            /**
+             * Não encontrei o channel log_service no arquivo de configuração de logs (config/logging.php), logo, a finalidade para qual essa trait se destina não funciona
+             */
             Log::channel('log_service')->{$logLevel}($context['description'], $context);
         } catch (Throwable $e) {
             return [
@@ -163,6 +166,10 @@ trait Logger
             $level
         );
 
+        /**
+         * Por questões de segurança e não expor o stack tracing da exceção, recomendo verificar se está em ambiente local ou de teste para depuração com dump(), por exemplo:
+         * if (app()->environment('local', 'staging')) dump($exception);
+         */
         dump($exception);
 
         // Para evitar propagação de log duplicado, o erro é propagado como

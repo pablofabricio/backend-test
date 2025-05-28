@@ -133,6 +133,10 @@ class Handler extends ExceptionHandler
             );
         }
 
+        /**
+         * Por questões de segurança e não expor o stack tracing da exceção, recomendo verificar se está em ambiente local ou de teste para depuração com dump(), por exemplo:
+         * if (app()->environment('local', 'staging')) dump($exception);
+         */
         dump($exception);
 
         $response = new DefaultResponse(
