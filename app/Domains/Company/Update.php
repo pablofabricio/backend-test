@@ -20,6 +20,11 @@ class Update extends BaseDomain
      */
     protected string $name;
 
+     /**
+      * Sugestão:
+      * Alterar a identação seguindo a PSR-12
+      */
+
     public function __construct(string $id, string $name)
     {
         $this->id   = $id;

@@ -16,6 +16,14 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
+
+    /**
+     * Sugestão:
+     * utilizar nome descritivo no método de teste.
+     * ex:
+     * public function test_user_can_register_card_successfully()
+     * Incluir cenários negativos
+     */
     public function testRegister()
     {
         $user    = User::factory()->user()->create();

@@ -41,12 +41,22 @@ class CompanyController extends Controller
      *
      * @return JsonResponse
      */
+
+    /**
+     * Sugestão:
+     * Criar um usecase para a atualização da company
+     * Manter a nomeclatura das variáveis no padrão, nesse caso o inglês.
+     * Evitar o uso do first() após o find(), já que o find já retorna uma instancia
+     * Adicionar a var $companyId que irá receber Auth::user()->company_id, evitando duplicidade na chamada
+     */
+
     public function update(UpdateRequest $request): JsonResponse
     {
         $dominio = (new UpdateDomain(
             Auth::user()->company_id,
             $request->name,
         ))->handle();
+
         (new CompanyUpdate($dominio))->handle();
 
         $resposta = Company::find(Auth::user()->company_id)->first()->toArray();

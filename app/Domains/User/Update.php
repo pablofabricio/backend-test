@@ -51,6 +51,11 @@ class Update extends BaseDomain
      */
     protected ?string $type;
 
+    /**
+     * Sugestão:
+     * Alterar a identação seguindo a PSR-12
+     */
+
     public function __construct(
         string $id,
         string $companyId,
@@ -65,6 +70,9 @@ class Update extends BaseDomain
         $this->email     = $email;
         $this->type      = $type;
 
+    /**
+     * Melhoria: remover lógica de dentro do construtor
+     */
         $this->cryptPassword($password);
     }
 
@@ -103,6 +111,11 @@ class Update extends BaseDomain
      *
      * @return void
      */
+
+    /**
+     * Sugestão: extrair os tipos para enums, fazendo com que fique mais fácil acrescentar um novo tipo posteriormente
+     */
+
     protected function checkType(): void
     {
         if (is_null($this->type)) {

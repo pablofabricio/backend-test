@@ -36,6 +36,12 @@ class CanUseDocumentNumber extends BaseRepository
      *
      * @return bool
      */
+
+    /**
+     * Sugestão:
+     * A variável sugere que a instância seja um user, porém se trata de uma company
+     */
+
     public function handle(): bool
     {
         $user = $this->builder

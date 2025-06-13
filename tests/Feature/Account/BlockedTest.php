@@ -16,6 +16,17 @@ class BlockedTest extends TestCase
      *
      * @return void
      */
+
+    /**
+     * Melhoria:
+     * adicionar verificação no banco de dados para garantir que a conta foi realmente atualizada como "bloqueada".
+     * ex:
+     * $this->assertDatabaseHas('accounts', [
+     *     'id'     => $account->id,
+     *     'status' => 'STATUS_BLOQUEADO',
+     * ]);
+     */
+
     public function testBlocked()
     {
         $user    = User::factory()->user()->create();

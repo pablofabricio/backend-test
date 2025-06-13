@@ -75,6 +75,11 @@ class CreateFirstUser extends BaseUseCase
      *
      * @return CreateUserDomain
      */
+
+    /**
+     * Sugestão:
+     * declarar uma constante DEFAULT_USER_TYPE na classe, assim tornando mais legível
+     */
     protected function validateUser(): CreateUserDomain
     {
         return (new CreateUserDomain(
@@ -111,6 +116,11 @@ class CreateFirstUser extends BaseUseCase
 
     /**
      * Cria um usuário MANAGER e a empresa
+     */
+
+    /**
+     * Sugestão:
+     * Adicionar o retorno do handle, nesse caso um array
      */
     public function handle()
     {

@@ -37,6 +37,11 @@ class Register extends BaseDomain
      */
     protected string $pin;
 
+    /**
+     * Sugestão:
+     * Alterar a identação seguindo a PSR-12
+     */
+
     public function __construct(string $userId, string $pin, string $cardId)
     {
         $this->userId = $userId;
@@ -49,6 +54,13 @@ class Register extends BaseDomain
      *
      * @return void
      */
+
+    /**
+     * Sugestão:
+     * Melhorar o retorno da mensagem 'ACCOUNT_NOT_FOUND' criando uma classe enum
+     * Criar também um enum para os códigos de exceptio, assim tornando o código mais legível e de fácil manutenção
+     */
+
     protected function findAccountId(): void
     {
         $account = (new FindByUser($this->userId))->handle();
@@ -66,6 +78,12 @@ class Register extends BaseDomain
     /**
      * Cartão não pode já estar vinculado
      */
+
+     /**
+      * Sugestão:
+      * Acrescentar a tipagem do retorno do método
+      */
+
     protected function checkExternalId()
     {
         if (!(new CanUseExternalId($this->cardId))->handle()) {

@@ -6,6 +6,11 @@ use Throwable;
 use App\UseCases\BaseUseCase;
 use App\Repositories\User\Find;
 
+/**
+ * Melhoria:
+ * Nome de classe fora do padrão. Renomear para Show
+ */
+
 class show extends BaseUseCase
 {
     /**

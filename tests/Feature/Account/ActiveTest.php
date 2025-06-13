@@ -16,6 +16,15 @@ class ActiveTest extends TestCase
      *
      * @return void
      */
+
+    /**
+     * Sugestão:
+     * A rota '/api/users/$user->id/account/active' está hardcoded, o que pode gerar um erro caso haja alguma alteração futura
+     * Não há teste para falhas ou comportamentos inesperados
+     * ex: falha de autenticação, conta não registrada e usuário sem permissão para ativar a conta
+     * Nomes mais intuitivos para os testes
+     */
+
     public function testActive()
     {
         $user    = User::factory()->user()->create();

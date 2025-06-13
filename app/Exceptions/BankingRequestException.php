@@ -19,6 +19,11 @@ class BankingRequestException extends Exception
      */
     public int $statusCode;
 
+    /**
+     * Sugestão:
+     * Alterar a identação seguindo a PSR-12
+     */
+
     public function __construct(string $message, array $response, int $statusCode)
     {
         parent::__construct($message);

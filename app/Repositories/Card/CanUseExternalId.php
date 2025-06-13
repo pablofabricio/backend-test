@@ -24,6 +24,11 @@ class CanUseExternalId extends BaseRepository
         $this->model = Card::class;
     }
 
+    /**
+     * Sugestão:
+     * Como o projeto utiliza o php na versão 8, é possível utilizar property promotion
+     */
+
     public function __construct(string $externalId)
     {
         $this->externalId = $externalId;
