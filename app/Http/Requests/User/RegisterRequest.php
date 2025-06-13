@@ -11,6 +11,16 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
+
+    /**
+     * Sugestão:
+     * Adicionar a validação min e max
+     * O type deve conter os valores do enum já sugeridos anteriormente.
+     * ex: 'type'=> [
+     *          'required',
+     *         Rule::in(array_column(UserType::cases(), 'value')),
+     *    ],
+     */
     public function rules(): array
     {
         return [

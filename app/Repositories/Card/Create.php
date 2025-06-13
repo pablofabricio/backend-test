@@ -37,6 +37,12 @@ class Create extends BaseRepository
      *
      * @return array
      */
+
+    /**
+     * Sugestão:
+     * Acrescentar o valor ACTIVE como default na migration, assim não precisando passar o valor do status
+     */
+
     public function handle(): array
     {
         return $this->create(

@@ -18,6 +18,13 @@ class CardController extends Controller
      *
      * @return JsonResponse
      */
+
+     /**
+      * Sugestão:
+      * a classe Find por se tratar de uma integração externa, não deveria ser utilizada diretamente no controller.
+      * Sua lógica deveria encapsulada em um caso de uso específico
+      */
+
     public function show(string $userId): JsonResponse
     {
         $response = (new Find($userId))->handle();
@@ -34,6 +41,12 @@ class CardController extends Controller
      *
      * @return JsonResponse
      */
+
+    /**
+     * Sugestão:
+     * Validar a request
+     */
+
     public function register(string $userId, Request $request): JsonResponse
     {
         $response = (new Register($userId, $request->pin, $request->card_id))->handle();

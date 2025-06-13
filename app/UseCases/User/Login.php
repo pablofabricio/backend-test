@@ -30,6 +30,11 @@ class Login extends BaseUseCase
      *
      * @return void
      */
+
+    /**
+     * Melhoria:
+     * Utilizar camel case no repository
+     */
     protected function createToken(): void
     {
         $this->token = (new create_token($this->id))->handle();

@@ -15,6 +15,12 @@ abstract class BaseDomain
      *
      * @return mixed
      */
+
+    /**
+     * Sugestão:
+     * Verificar se a propriedade existe antes de tentar acessá-la, assim evitando retornos com o valor null
+     */
+
     public function __get(string $prop): mixed
     {
         return $this->{$prop};

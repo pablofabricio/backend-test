@@ -22,6 +22,11 @@ class Create extends BaseDomain
      */
     protected string $documentNumber;
 
+    /**
+     * Sugestão:
+     * Alterar a identação seguindo a PSR-12
+     */
+
     public function __construct(string $name, string $documentNumber)
     {
         $this->name           = $name;
@@ -31,6 +36,12 @@ class Create extends BaseDomain
     /**
      * Documento de empresa deve ser único no sistema
      */
+
+    /**
+     * Sugestão:
+     * Acrescentar a tipagem do retorno do método
+     */
+
     protected function checkDocumentNumber()
     {
         if (!(new CanUseDocumentNumber($this->documentNumber))->handle()) {

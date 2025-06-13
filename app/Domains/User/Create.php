@@ -52,6 +52,11 @@ class Create extends BaseDomain
      */
     protected string $type;
 
+    /**
+     * Sugestão:
+     * Alterar a identação seguindo a PSR-12
+     */
+
     public function __construct(
         string $companyId,
         string $name,
@@ -116,6 +121,11 @@ class Create extends BaseDomain
      *
      * @return void
      */
+
+    /**
+     * Sugestão: extrair os tipos para enums, fazendo com que fique mais fácil acrescentar um novo tipo posteriormente
+     */
+
     protected function checkType(): void
     {
         if (!in_array($this->type, ['USER', 'VIRTUAL', 'MANAGER'])) {

@@ -37,6 +37,12 @@ class UserController extends Controller
      *
      * @return JsonResponse
      */
+
+     /**
+     * Sugestão:
+     * Renomear create() e register() para melhor distinção, pois são usados para criar usuários, mas com finalidades diferentes
+     */
+
     public function register(RegisterRequest $request): JsonResponse
     {
         $params = new CreateFirstUserParams(
