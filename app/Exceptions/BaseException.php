@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Responses\InternalError;
 
+/*
+
+AJUSTES:
+
+7. Nunca retornar status 200 em exceção como tem a possibilidade na linha 77, mas usar uma constante do laravel como Response::HTTP_INTERNAL_SERVER_ERROR
+
+*/
+
 class BaseException extends \Exception
 {
     /**

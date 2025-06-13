@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Responses\DefaultResponse;
 use App\Http\Resources\Account\ShowResource;
 
+/*
+
+AJUSTES: 
+
+6. Utilizar padronização nos status code, tudo está retornando como 200 caso sucesso. 
+Isso melhora a clareza dos retornos e a experiência de quem consome a aplicação. 
+
+poderia utilizar:
+   - 204 para retornos com sucesso sem conteúdo
+   - 201 criação de recursos 
+*/
+
 class AccountController extends Controller
 {
     /**

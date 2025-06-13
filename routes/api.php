@@ -1,5 +1,22 @@
 <?php
 
+/* 
+
+AJUSTES:
+
+1. Separação das rotas em arquivos por domínio, o que facilita a manutenção e visualização. 
+
+Exemplo: users.php, companies.php, accounts.php e card.php
+
+2. Deixar rotas para accounts e card de forma direta para não gerar acoplamento e complexidade sem necessidade. 
+Pegar id do user pelo que já está logado.
+
+Exemplo: {url}/accounts e {url}/cards
+
+3. Nas rotas de ativar e bloquear conta poderia utilizar método patch por ser uma atualização parcial
+
+*/
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\UserController;

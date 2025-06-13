@@ -2,6 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+/* 
+
+AJUSTES: 
+
+4. Controller realizando algo fora de sua responbilidade. 
+No método de update está acessando diretamente o model de company com uma query, sem ter um useCase, ou repository. 
+
+5. Utilizar o retorno do update para a response e não realizar outra consulta: (new CompanyUpdate($dominio))->handle();
+*/
+
 use App\Models\Company;
 use App\UseCases\Company\Show;
 use Illuminate\Http\JsonResponse;
@@ -47,7 +58,8 @@ class CompanyController extends Controller
             Auth::user()->company_id,
             $request->name,
         ))->handle();
-        (new CompanyUpdate($dominio))->handle();
+
+        (new CompanyUpdate($dominio))->handle(); 
 
         $resposta = Company::find(Auth::user()->company_id)->first()->toArray();
 

@@ -1,5 +1,16 @@
 <?php
 
+/* 
+
+AJUSTES: 
+
+3. Simplificar os métodos das classes de params
+Exemplo: 
+    $params = CreateParams::fromRequest($request);
+    $response = (new Create($params))->handle();
+
+*/
+
 namespace App\Http\Controllers;
 
 use App\UseCases\User\show;
